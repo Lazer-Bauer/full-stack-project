@@ -1,0 +1,84 @@
+@local = http://localhost:3000/tasks
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjE3Yzk3ZWRkMjc3MjgwMDllNWI4NTEiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MTMxODM0MDN9._dgYzOzBQiQK3PjVnBsYeEnA4R37GoRGFaS8gCqqGIw
+
+
+POST {{local}}/jobs
+x-auth-token:{{token}}
+Content-Type:application/json
+
+{
+  "user_id":"661942b02f052ae230d0ba13",
+  "date":"2024/04/24",
+ "topic":"health",
+  "content": "hgdhjsdhgfjhg ghfsdufhioehfhhdsjkfhf jdhjkfhfjhdfhj"
+}
+###
+
+GET {{local}}/jobs/pending
+x-auth-token:{{token}}
+
+
+###
+POST {{local}}/users/login
+Content-Type: application/json
+
+{
+"email":"lop@gmail.com",
+  "password":"Eliezer22!"
+}
+
+### 
+
+POST {{local}}/users
+Content-Type: application/json
+
+{
+  "email":"abcd@gmail.com",
+  "password":"zliezer22#djHJ",
+  "isBusiness":"true",
+  "isAdmin":"true",
+  "phone":"0585979532",
+  "name":{
+        "first":"eliezer",
+        "last":"bauer"
+  },
+  
+  "address":{
+    "country":"israel",
+    "city":"jerusalem",
+    "street":"peri chadash",
+    "houseNumber":"10"
+  },
+   "image":{
+        "url":"",
+        "alt":""
+    } 
+  
+}
+###
+
+PATCH  {{local}}/jobs/661edfa965a530e6fbe07a8d
+x-auth-token:{{token}}
+Content-Type:application/json
+
+{
+  "status":1,
+  "comment":"amazing patch"
+}
+###
+DELETE  {{local}}/jobs/661d22862c8a00d7b52078a1
+
+
+###
+PUT {{local}}/jobs/66202ec1dd06e1bed3c82563
+Content-Type:application/json
+x-auth-token:{{token}}
+
+{
+"user_id":"661942872f052ae230d0ba10",
+"date":"2024/04/24",
+"topic":"this time it will work!!!!",
+"content": "pratice makes perfection!!!11",
+"comment":"i have finished my job bosssss",
+"status":1
+  }
