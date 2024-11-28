@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import Joi from "joi";
 
 import { useNavigate } from "react-router-dom";
@@ -51,7 +52,17 @@ const SignIn = () => {
         navigate("/");
       } catch (err) {
         console.log(err);
-        if (err.response?.status === 400) {
+        if (err.response?.status !== 200) {
+          toast.error("⚠️ The email or password you provide are not correct", {
+            position: "top-center", // Position at top-center
+            autoClose: 5000, // Auto-close after 3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: checked ? "light" : "dark", // Adapt to dark mode
+          });
+
           setServerError(err.response.data);
         }
       }
@@ -59,7 +70,9 @@ const SignIn = () => {
   });
   return (
     <main
-      className={`form-signin w-25 pt-5 mt-5 w-100 ${checked ? "" : `bg-dark`}`}
+      className={`form-signin w-25 pt-5 flex-grow-1 mt-0 w-100 ${
+        checked ? "" : `bg-dark`
+      }`}
     >
       <form onSubmit={form.handleSubmit} className="pt-5">
         <h1

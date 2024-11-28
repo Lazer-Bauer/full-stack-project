@@ -12,15 +12,27 @@ export const authContext = createContext({
 });
 authContext.displayName = "auth";
 export const AuthProvider = ({ children }) => {
-  const storedUser = localStorage.getItem("savedUser");
-  const [user, setUser] = useState(!storedUser ? null : JSON.parse(storedUser));
+  const storedUser = localStorage.getItem("savedUser")
+    ? JSON.parse(localStorage.getItem("savedUser"))
+    : null;
+  const [user, setUser] = useState(storedUser);
   const [checked, setChecked] = useState("false");
   const [search, setSearch] = useState("");
   const [admin, setAdmin] = useState(false);
+  const [jobs, setJobs] = useState([]);
+  // useEffect(() => {
+  //   // refreshUser();
+  //   setAdmin(storedUser.isAdmin);
+  //   console.log(storedUser, "isAdmin");
+  // }, []);
+
   useEffect(() => {
-    refreshUser();
-    setAdmin(false);
+    if (storedUser) {
+      setAdmin(storedUser.isAdmin || false); // Add fallback to `false`
+      console.log(storedUser, "isAdmin");
+    }
   }, []);
+
   const refreshUser = async (u) => setUser(u);
   console.log(refreshUser);
   const login = async (credentials) => {
@@ -48,6 +60,8 @@ export const AuthProvider = ({ children }) => {
         search,
         setSearch,
         admin,
+        jobs,
+        setJobs,
         signUp: usersService.createUser,
       }}
     >

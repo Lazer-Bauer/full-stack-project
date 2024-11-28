@@ -15,7 +15,14 @@ router.post("/", authorize, async (req, res) => {
     res.status(500).send(err);
   }
 });
-
+router.get("/open", authorize, async (req, res) => {
+  try {
+    const job = await Job.find({ status: 0 });
+    res.json(job); // Assuming you want to send the result back as JSON
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 router.get("/pending", authorize, async (req, res) => {
   try {
     const job = await Job.find({ status: 1 });
@@ -24,7 +31,23 @@ router.get("/pending", authorize, async (req, res) => {
     res.status(500).send(error);
   }
 });
+router.get("/completed", authorize, async (req, res) => {
+  try {
+    const job = await Job.find({ status: 2 });
+    res.json(job); // Assuming you want to send the result back as JSON
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
+router.get("/alljobs", authorize, async (req, res) => {
+  try {
+    const job = await Job.find();
+    res.json(job); // Assuming you want to send the result back as JSON
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 router.get("/:id", async (req, res) => {
   const paramsId = req.params.id;
 
@@ -55,9 +78,10 @@ router.patch("/:id", authorize, async (req, res) => {
       return;
     }
     console.log(job);
-
+    //job.content = req.body.content;
     job.comment = req.body.comment;
     job.status = req.body.status;
+
     console.log(job);
     await job.save();
     // response

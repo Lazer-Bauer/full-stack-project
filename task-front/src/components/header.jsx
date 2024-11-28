@@ -1,25 +1,48 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../context/auth.context";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import Jobs from "./jobCreation/Jobs";
 const Header = () => {
-  const { user } = useAuth();
-  const { checked, setChecked } = useAuth();
-  const { search, setSearch } = useAuth();
-
+  const {
+    user,
+    checked = false,
+    setChecked,
+    search,
+    setSearch,
+    jobs,
+    admin,
+  } = useAuth();
+  const location = useLocation();
+  const [showSearch, setShowSearch] = useState(false);
+  useEffect(() => {
+    if (location.pathname === "/" && !admin && user) {
+      setShowSearch(true);
+    } else if (
+      location.pathname === "/" ||
+      location.pathname === "/about" ||
+      !user
+    ) {
+      setShowSearch(false);
+    } else {
+      setShowSearch(jobs.length > 0);
+    }
+  }, [location, jobs]);
+  console.log(jobs);
   const toggle = () => {
     setChecked(!checked);
+    console.log(checked);
   };
 
   const handleInputChange = (event) => {
     setSearch(event.target?.value);
+    console.log(event.target.value, event);
   };
 
   return (
     <>
       <header
         className={`p-3 mb-3 border-bottom w-100 ${
-          !checked ? "bg-primary" : "bg-info"
+          !checked ? "bg-dark text-light" : "bg-info"
         } navbar navbar-expand-sm position-fixed z-3`}
       >
         <button
@@ -38,7 +61,11 @@ const Header = () => {
 
         <div className="collapse navbar-collapse" id="navbarsExample03">
           <div className="container">
-            <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <div
+              className={`${
+                !checked && "text-primary"
+              }d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start`}
+            >
               <Link
                 to="/"
                 className="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none"
@@ -71,8 +98,17 @@ const Header = () => {
                     About
                   </NavLink>
                 </li>
+
                 {user?.isAdmin && (
                   <>
+                    <li>
+                      <NavLink
+                        to="open"
+                        className="nav-link px-2 link-body-emphasis text-light"
+                      >
+                        open jobs
+                      </NavLink>
+                    </li>
                     <li>
                       <NavLink
                         to="pending"
@@ -83,7 +119,15 @@ const Header = () => {
                     </li>
                     <li>
                       <NavLink
-                        to="my-cards"
+                        to="completed"
+                        className="nav-link px-2 link-body-emphasis text-light"
+                      >
+                        completed jobs
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="alljobs"
                         className="nav-link px-2 link-body-emphasis text-light"
                       >
                         all jobs
@@ -152,18 +196,27 @@ const Header = () => {
           className="col-12 col-sm-6 col-lg-2 mb-3 mb-lg-0 me-lg-6"
           role="search"
         >
-          <input
-            type="search"
-            className="form-control"
-            placeholder="Search..."
-            aria-label="Search"
-            value={search}
-            onChange={handleInputChange}
-            id="myInput"
-          />
+          {showSearch && (
+            <input
+              type="search"
+              className="form-control"
+              placeholder="Search..."
+              aria-label="Search"
+              value={search}
+              onChange={handleInputChange}
+              id="myInput"
+            />
+          )}
         </form>
       </header>
-      <div style={{ height: "150px" }}></div>
+      <div
+        style={{
+          height:
+            location.pathname === "/about" || location.pathname === "/sign-in"
+              ? "85px"
+              : "140px",
+        }}
+      ></div>
     </>
   );
 };

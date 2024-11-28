@@ -84,7 +84,7 @@ const JobCreationForm = ({ selectedDate, selectedUser, afterSubmit }) => {
         </div>
 
         <button type="submit" className="btn btn-primary">
-          Submit
+          Create job
         </button>
       </form>
     </div>

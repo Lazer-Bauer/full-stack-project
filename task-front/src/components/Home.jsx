@@ -5,12 +5,13 @@ import TaskCard from "./jobCreation/TaskCard";
 import { useEffect, useState } from "react";
 
 const Home = () => {
-  const { user, admin } = useAuth();
+  const { user, admin, checked } = useAuth();
   const [jobs, setJobs] = useState([]);
-  const { checked, search } = useAuth();
 
+  if (checked) console.log("success");
+  else console.log("failed");
   useEffect(() => {
-    async function fechJobs() {
+    async function fetchJobs() {
       getJobByUserId(user._id)
         .then((response) => {
           console.log(response.data);
@@ -18,7 +19,7 @@ const Home = () => {
         })
         .catch((error) => console.log(error));
     }
-    fechJobs();
+    fetchJobs();
   }, [admin]);
 
   return (
@@ -28,12 +29,17 @@ const Home = () => {
         {user && !admin && user.name.last}
         {admin && "Admin"}
       </h1>
+      {admin && (
+        <h4 className="text-center">
+          Please choose a user and a date to start creating a job.
+        </h4>
+      )}
       <JobCreation />
       {jobs ? (
         <div className="cards-container d-flex flex justify-content-center align-items-center flex-wrap  ">
           {jobs.map((job) => {
-            const date = job.date.split("T")[0];
-            console.log(job.date.split("T"));
+            const date = job.date?.split("T")[0];
+
             return (
               <TaskCard
                 date={date}

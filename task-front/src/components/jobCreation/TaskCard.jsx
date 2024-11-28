@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { patchJob } from "../../services/JobServices";
-
+import { useAuth } from "../../context/auth.context";
 import React, { useEffect, useState } from "react";
 
 const TaskCard = ({
@@ -12,13 +12,15 @@ const TaskCard = ({
   jobComment,
   jobStatus,
 }) => {
-  const [comment, setComment] = useState("");
-  const [status, setStatus] = useState("");
+  const [comment, setComment] = useState(jobComment);
+  const [status, setStatus] = useState(
+    jobStatus === 0 ? "open" : jobStatus === 1 ? "pending..." : "completed"
+  );
 
-  useEffect(() => {
-    setStatus(jobStatus ? "pending..." : "open");
-    setComment(jobComment);
-  }, []);
+  const { admin } = useAuth();
+  // useEffect(() => {
+  //   console.log(status);
+  // }, [jobStatus]);
 
   const handleCommentChange = (event) => {
     setComment(event.target.value);
@@ -26,10 +28,11 @@ const TaskCard = ({
 
   const submitComment = async () => {
     console.log("Comment submitted:", comment);
-    console.log(userId, jobId);
+    console.log(status, "from taskCard");
     try {
-      await patchJob(jobId, { comment, status: 1 });
-      setStatus("pending....");
+      await patchJob(jobId, { comment, status: admin ? 0 : 1 });
+      setStatus(admin ? "open" : "pending....");
+      console.log(status);
       toast.success("your assignment was submitted successfully");
     } catch (err) {
       toast.error("Error in creating job ⚠️ ,please try again later");
@@ -57,6 +60,7 @@ const TaskCard = ({
               id="commentTextarea"
               value={comment}
               onChange={handleCommentChange}
+              disabled={status !== 0 && status !== "open"}
               maxLength="5000"
               minLength="5"
               rows="3"
@@ -64,8 +68,8 @@ const TaskCard = ({
             ></textarea>
           </div>
           <button
-            disabled={jobStatus}
             onClick={submitComment}
+            disabled={status !== "open"}
             className="btn btn-primary"
           >
             Submit Comment

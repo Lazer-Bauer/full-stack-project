@@ -3,13 +3,16 @@ import { updateJob } from "../../services/JobServices";
 import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check";
 import { toast } from "react-toastify";
-
+import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/auth.context";
 /*
  you'll get a userId from the page slug { :id }
   get the task state from passing through page navigate.
 */
 
 const JobUpdateForm = ({ task, date, userId }) => {
+  const { admin } = useAuth();
+  const navigate = useNavigate();
   const [message, setMessage] = useState();
   const [topic, setTopic] = useState(); //
   useEffect(() => {
@@ -24,17 +27,21 @@ const JobUpdateForm = ({ task, date, userId }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Submit your form logic here
-    console.log("Submitted Topic:", topic);
+    console.log(date);
     console.log("Submitted Message:", message);
 
     try {
       const response = await updateJob(task._id, {
         date: date,
         content: message,
+        comment: admin ? "" : message,
         topic: topic,
+        status: admin ? 0 : 1,
         user_id: userId,
       });
       toast.success("The job was updated successfully");
+      console.log(admin);
+      navigate("/");
       // afterSubmit();
     } catch (err) {
       toast.error("Error in updating job ⚠️ ,please try again later");
@@ -84,7 +91,7 @@ const JobUpdateForm = ({ task, date, userId }) => {
         </div>
 
         <button type="submit" className="btn btn-primary">
-          Submit
+          up date job
         </button>
       </form>
     </div>

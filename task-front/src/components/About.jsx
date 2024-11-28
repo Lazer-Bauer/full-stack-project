@@ -1,9 +1,14 @@
 import React from "react";
-
+import { AuthProvider, useAuth } from "../context/auth.context";
 const About = () => {
+  const { checked } = useAuth();
   return (
-    <div className="mt-4 text-center d-flex flex-column align-items-center">
-      <h1 className="bg-info w-50 text-white p-2 rounded">
+    <div
+      className={`mt-4 text-center d-flex flex-column align-items-center ${
+        !checked ? "bg-dark text-light" : "bg-light"
+      }`}
+    >
+      <h1 className="bg-dark-subtle w-50 text-white p-2 rounded">
         About Our Task Management System
       </h1>
 

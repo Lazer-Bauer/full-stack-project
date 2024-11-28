@@ -2,12 +2,12 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 const TOKEN_KEY = "token";
 export async function registerUser(details) {
-  return axios.post("http://localhost:3000/tasks/users", details);
+  return axios.post("http://localhost:5000/tasks/users", details);
 }
 
 export async function login(values) {
   const response = await axios.post(
-    "http://localhost:3000/tasks/users/login",
+    "http://localhost:5000/tasks/users/login",
     values
   );
 
@@ -18,7 +18,7 @@ export async function login(values) {
   return response;
 }
 export async function getAllUsers() {
-  const response = await axios.get("http://localhost:3000/tasks/users");
+  const response = await axios.get("http://localhost:5000/tasks/users");
 
   console.log(mapUserResponse(response.data));
   return mapUserResponse(response.data);
@@ -56,7 +56,7 @@ export async function getUser() {
     console.log(3);
     console.log(deCodedUser);
     const response = await axios.get(
-      `http://localhost:3000/tasks/users/${deCodedUser._id}`
+      `http://localhost:5000/tasks/users/${deCodedUser._id}`
     );
     console.log(4);
     localStorage.setItem("savedUser", JSON.stringify(response.data));

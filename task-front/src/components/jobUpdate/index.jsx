@@ -7,7 +7,7 @@ import { getJob } from "../../services/JobServices";
 export default function JobUpdate() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [job, setJob] = useState({});
-  const location = useLocation();
+
   const { id } = useParams();
   const [userId, setUserId] = useState();
   useEffect(() => {
@@ -17,6 +17,7 @@ export default function JobUpdate() {
         .then((response) => {
           console.log(response.data[0]);
           setJob(response.data[0]);
+          setSelectedDate(response.data[0].date);
         })
         .catch((error) => console.log(error));
     }
@@ -24,6 +25,7 @@ export default function JobUpdate() {
   }, [id]);
 
   const handleDateChange = (date) => {
+    console.log(date);
     setSelectedDate(date);
   };
   const handleUserChange = (id) => {

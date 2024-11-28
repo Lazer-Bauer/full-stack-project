@@ -9,7 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import SignOut from "./components/Sign-out";
 import ProtectedRoute from "./common/protectedRoutes";
 import { ToastContainer } from "react-toastify";
-import PendingJobs from "./components/jobCreation/PendingJobs";
+import Jobs from "./components/jobCreation/Jobs";
 import IsAdmin from "./common/IsAdmin";
 import JobUpdate from "./components/jobUpdate/index";
 import Footer from "./components/Footer";
@@ -34,7 +34,31 @@ function App() {
           path="/pending"
           element={
             <IsAdmin>
-              <PendingJobs />
+              <Jobs status={1} />
+            </IsAdmin>
+          }
+        />
+        <Route
+          path="/alljobs"
+          element={
+            <IsAdmin>
+              <Jobs />
+            </IsAdmin>
+          }
+        />
+        <Route
+          path="/open"
+          element={
+            <IsAdmin>
+              <Jobs status={0} />
+            </IsAdmin>
+          }
+        />
+        <Route
+          path="/completed"
+          element={
+            <IsAdmin>
+              <Jobs status={2} />
             </IsAdmin>
           }
         />

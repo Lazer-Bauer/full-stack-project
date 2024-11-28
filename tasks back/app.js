@@ -22,5 +22,5 @@ app.use("/tasks/users/login", require("./routes/user.auth"));
 app.use("/tasks/users", require("./routes/userRoute"));
 app.use("/tasks/jobs", require("./routes/JobesRoutes"));
 // app.use("/tasks/jobs", require("./routes/JobesRoutes"));
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(chalk.blue(`listening to port ${PORT}`)));

@@ -1,4 +1,4 @@
-@local = http://localhost:3000/tasks
+@local = http://localhost:5000/tasks
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjE3Yzk3ZWRkMjc3MjgwMDllNWI4NTEiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MTMxODM0MDN9._dgYzOzBQiQK3PjVnBsYeEnA4R37GoRGFaS8gCqqGIw
 
 
@@ -14,7 +14,7 @@ Content-Type:application/json
 }
 ###
 
-GET {{local}}/jobs/pending
+GET {{local}}/jobs/alljobs
 x-auth-token:{{token}}
 
 
