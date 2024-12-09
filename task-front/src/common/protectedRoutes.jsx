@@ -7,7 +7,7 @@ const ProtectedRoute = ({ children, onlyBiz = false }) => {
   if (!user) {
     return <Navigate to="/sign-in" />;
   }
-
+  console.log(children);
   return children;
 };
 export default ProtectedRoute;

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import usersService from "../services/userService";
-
+import { getJobByUserId } from "../services/JobServices";
 const fn_error_context_must_be_used = () => {
   throw new Error("must use authContext provider for consumer to work");
 };
@@ -20,11 +20,6 @@ export const AuthProvider = ({ children }) => {
   const [search, setSearch] = useState("");
   const [admin, setAdmin] = useState(false);
   const [jobs, setJobs] = useState([]);
-  // useEffect(() => {
-  //   // refreshUser();
-  //   setAdmin(storedUser.isAdmin);
-  //   console.log(storedUser, "isAdmin");
-  // }, []);
 
   useEffect(() => {
     if (storedUser) {
@@ -41,6 +36,9 @@ export const AuthProvider = ({ children }) => {
     await refreshUser(u);
     console.log(user);
     setAdmin(u?.isAdmin);
+    const jobResponse = await getJobByUserId(u._id);
+    console.log(jobResponse);
+    setJobs(jobResponse.data);
     return response;
   };
 

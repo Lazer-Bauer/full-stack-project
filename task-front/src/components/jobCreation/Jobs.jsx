@@ -12,6 +12,7 @@ const Jobs = ({ status }) => {
   const { search, jobs, setJobs } = useAuth();
 
   async function loadJobs() {
+    console.log("enter");
     const response =
       status === 0
         ? await getOpenJobs()
@@ -20,22 +21,15 @@ const Jobs = ({ status }) => {
         : status === 2
         ? await getCompletedJobs()
         : await getAllJobs();
-    {
-    }
+    console.log(search);
     setJobs(response.data ?? []);
   }
 
   useEffect(() => {
     loadJobs();
   }, [status]);
-  console.log(jobs);
-  // const FilterJobs = (jobs, search) =>
-  //   jobs?.every((job) =>
-  //     ["content", "comment", "topic"].some((attribute) =>
-  //       job.Attributes[attribute].includes(search)
-  //     )
-  //   );
-  // console.log(FilterJobs());
+  console.log(jobs, "lazer");
+
   return (
     <>
       {search
@@ -60,21 +54,7 @@ const Jobs = ({ status }) => {
                 refresh={loadJobs}
               />
             ))
-        : // .filter((job) => job.content.includes(search))
-          // .map((job) => (
-          //   <CompletedJob
-          //     date={job.date}
-          //     topic={job.topic}
-          //     task={job.content}
-          //     userId={job.user_id}
-          //     jobId={job._id}
-          //     jobComment={job.comment}
-          //     jobStatus={job.status}
-          //     key={job._id}
-          //     refresh={loadJobs}
-          //   />
-          // ))
-          jobs &&
+        : jobs &&
           jobs.map((job) => (
             <CompletedJob
               date={job.date}

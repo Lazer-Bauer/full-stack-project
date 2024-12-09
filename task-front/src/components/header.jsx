@@ -15,7 +15,7 @@ const Header = () => {
   const location = useLocation();
   const [showSearch, setShowSearch] = useState(false);
   useEffect(() => {
-    if (location.pathname === "/" && !admin && user) {
+    if (location.pathname === "/" && jobs.length > 0) {
       setShowSearch(true);
     } else if (
       location.pathname === "/" ||
