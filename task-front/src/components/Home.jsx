@@ -5,11 +5,9 @@ import TaskCard from "./jobCreation/TaskCard";
 import { useEffect, useState } from "react";
 
 const Home = () => {
-  const { user, admin, checked } = useAuth();
-  const [jobs, setJobs] = useState([]);
+  const { user, admin, jobs, setJobs, checked } = useAuth();
+  // const [jobs, setJobs] = useState([]);
 
-  if (checked) console.log("success");
-  else console.log("failed");
   useEffect(() => {
     async function fetchJobs() {
       getJobByUserId(user._id)

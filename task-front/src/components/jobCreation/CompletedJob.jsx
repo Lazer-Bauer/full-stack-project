@@ -51,7 +51,11 @@ const CompletedJob = ({
   return (
     <div className="container my-5">
       <div className="card ">
-        <div className="d-flex justify-content-between align-items-center w-100 bg-primary">
+        <div
+          className={`d-flex justify-content-between align-items-center w-100 ${
+            checked ? "bg-primary" : "bg-dark"
+          }`}
+        >
           <div
             className={`card-header text-center  text-white ${
               !checked && "bg-dark"
@@ -63,7 +67,9 @@ const CompletedJob = ({
         </div>
 
         <div
-          className={`card-body ${!checked ? "bg-dark" : "bg-light text-whit"}`}
+          className={`card-body ${
+            !checked ? "bg-dark text-white" : "bg-light"
+          }`}
         >
           <h5 className="card-title">{topic}</h5>
           <p className="card-text">{task}</p>

@@ -14,10 +14,11 @@ import IsAdmin from "./common/IsAdmin";
 import JobUpdate from "./components/jobUpdate/index";
 import Footer from "./components/Footer";
 import About from "./components/About";
-
+import { checked, useAuth } from "./context/auth.context";
 function App() {
+  const { checked } = useAuth();
   return (
-    <div className="App">
+    <div className={`App ${!checked ? "bg-dark" : "bg - light"}`}>
       <Header />
       <Routes>
         {/* <Route path="/about" element={<About />} /> */}

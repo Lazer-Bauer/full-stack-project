@@ -26,8 +26,8 @@ const Header = () => {
     } else {
       setShowSearch(jobs.length > 0);
     }
+    console.log(jobs);
   }, [location, jobs]);
-  console.log(jobs);
   const toggle = () => {
     setChecked(!checked);
     console.log(checked);
