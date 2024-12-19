@@ -32,6 +32,11 @@ const Jobs = ({ status }) => {
 
   return (
     <>
+      {jobs && jobs.length === 0 && (
+        <span className="d-flex justify-content-center">
+          <img src="https://img.freepik.com/premium-vector/no-task-available-illustration_585024-46.jpg"></img>
+        </span>
+      )}
       {search
         ? jobs
 

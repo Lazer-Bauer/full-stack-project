@@ -20,77 +20,79 @@ function App() {
   return (
     <div className={`App ${!checked ? "bg-dark" : "bg - light"}`}>
       <Header />
-      <Routes>
-        {/* <Route path="/about" element={<About />} /> */}
+      <div className="content">
+        <Routes>
+          {/* <Route path="/about" element={<About />} /> */}
 
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/pending"
-          element={
-            <IsAdmin>
-              <Jobs status={1} />
-            </IsAdmin>
-          }
-        />
-        <Route
-          path="/alljobs"
-          element={
-            <IsAdmin>
-              <Jobs />
-            </IsAdmin>
-          }
-        />
-        <Route
-          path="/open"
-          element={
-            <IsAdmin>
-              <Jobs status={0} />
-            </IsAdmin>
-          }
-        />
-        <Route
-          path="/completed"
-          element={
-            <IsAdmin>
-              <Jobs status={2} />
-            </IsAdmin>
-          }
-        />
-        <Route
-          path="/update-job/:id"
-          element={
-            <IsAdmin>
-              <JobUpdate />
-            </IsAdmin>
-          }
-        />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pending"
+            element={
+              <IsAdmin>
+                <Jobs status={1} />
+              </IsAdmin>
+            }
+          />
+          <Route
+            path="/alljobs"
+            element={
+              <IsAdmin>
+                <Jobs />
+              </IsAdmin>
+            }
+          />
+          <Route
+            path="/open"
+            element={
+              <IsAdmin>
+                <Jobs status={0} />
+              </IsAdmin>
+            }
+          />
+          <Route
+            path="/completed"
+            element={
+              <IsAdmin>
+                <Jobs status={2} />
+              </IsAdmin>
+            }
+          />
+          <Route
+            path="/update-job/:id"
+            element={
+              <IsAdmin>
+                <JobUpdate />
+              </IsAdmin>
+            }
+          />
 
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/sign-out" element={<SignOut />} />
-        <Route path="/about" element={<About />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/sign-out" element={<SignOut />} />
+          <Route path="/about" element={<About />} />
 
-        <Route path="/sign-up-biz" element={<SignUp isBusiness />} />
-      </Routes>
-      <ToastContainer
-        position="top-right"
-        autoClose={6000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
+          <Route path="/sign-up-biz" element={<SignUp isBusiness />} />
+        </Routes>
+        <ToastContainer
+          position="top-right"
+          autoClose={6000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+      </div>
       <Footer />
     </div>
   );

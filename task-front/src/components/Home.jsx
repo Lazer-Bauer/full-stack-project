@@ -5,7 +5,7 @@ import TaskCard from "./jobCreation/TaskCard";
 import { useEffect, useState } from "react";
 
 const Home = () => {
-  const { user, admin, checked } = useAuth();
+  const { user, admin, checked, search } = useAuth();
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
@@ -22,37 +22,56 @@ const Home = () => {
 
   return (
     <div>
-      <h1 className="text-center">
+      <h1 className={`text-center ${!checked && "text-white"}`}>
         welcome back {user && !admin && user.name.first}&nbsp;
         {user && !admin && user.name.last}
         {admin && "Admin"}
       </h1>
       {admin && (
-        <h4 className="text-center">
+        <h4 className={`text-center ${!checked && "text-white"}`}>
           Please choose a user and a date to start creating a job.
         </h4>
       )}
       <JobCreation />
-      {jobs ? (
+      {jobs && jobs.length > 0 ? (
         <div className="cards-container d-flex flex justify-content-center align-items-center flex-wrap  ">
-          {jobs.map((job) => {
-            const date = job.date?.split("T")[0];
+          {search
+            ? jobs
 
-            return (
-              <TaskCard
-                date={date}
-                topic={job.topic}
-                task={job.content}
-                userId={job.user_id}
-                jobId={job._id}
-                jobComment={job.comment}
-                jobStatus={job.status}
-              />
-            );
-          })}
+                .filter(
+                  (job) =>
+                    job.content?.includes(search) ||
+                    job.topic?.includes(search) ||
+                    job.comment?.includes(search)
+                )
+                .map((job) => (
+                  <TaskCard
+                    date={job.date}
+                    topic={job.topic}
+                    task={job.content}
+                    userId={job.user_id}
+                    jobId={job._id}
+                    jobComment={job.comment}
+                    jobStatus={job.status}
+                    key={job._id}
+                  />
+                ))
+            : jobs &&
+              jobs.map((job) => (
+                <TaskCard
+                  date={job.date}
+                  topic={job.topic}
+                  task={job.content}
+                  userId={job.user_id}
+                  jobId={job._id}
+                  jobComment={job.comment}
+                  jobStatus={job.status}
+                  key={job._id}
+                />
+              ))}
         </div>
       ) : (
-        "<h2>You have no jobs</h2>"
+        !admin && <h2 className="text-center">You have no jobs</h2>
       )}
     </div>
   );

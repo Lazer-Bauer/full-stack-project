@@ -18,9 +18,6 @@ const TaskCard = ({
   );
 
   const { admin } = useAuth();
-  // useEffect(() => {
-  //   console.log(status);
-  // }, [jobStatus]);
 
   const handleCommentChange = (event) => {
     setComment(event.target.value);
@@ -44,7 +41,7 @@ const TaskCard = ({
       <div className="card">
         <div className="d-flex justify-content-between align-items-center w-100 bg-primary">
           <div className="card-header text-center  text-white">
-            <h5>Task for {date}</h5>
+            <h5>Task for {date?.split("T")[0]}</h5>
           </div>
           <div className="m-4  text-white">{status}</div>
         </div>
