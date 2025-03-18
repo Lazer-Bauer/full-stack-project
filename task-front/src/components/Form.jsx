@@ -40,7 +40,7 @@ const Form = ({ form, checked, serverError, isBusiness }) => {
           <label htmlFor="floatingPassword">Last name</label>
         </div>
 
-        <div className="form-floating pt-2">
+        <div className="form-floating pt-3">
           <input
             {...form.getFieldProps("email")}
             type="email"

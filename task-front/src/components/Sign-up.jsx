@@ -93,6 +93,13 @@ const SignUp = ({ isBusiness }) => {
 
   return (
     <main
+      style={{
+        backgroundImage: `url('https://www.shutterstock.com/image-illustration/in…ss-technology-network-concept-600w-2113601942.jpg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "100vh",
+        zIndex: "-100",
+      }}
       className={`form-signin w-100 m-auto pt-5 ${checked ? "" : `bg-dark`} `}
     >
       <Form

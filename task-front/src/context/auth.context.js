@@ -60,6 +60,7 @@ export const AuthProvider = ({ children }) => {
         admin,
         jobs,
         setJobs,
+
         signUp: usersService.createUser,
       }}
     >

@@ -2,6 +2,8 @@ import { deleteJob, patchJob, updateJob } from "../../services/JobServices";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth.context";
+import { toast } from "react-toastify";
+
 const CompletedJob = ({
   date,
   topic,
@@ -25,12 +27,15 @@ const CompletedJob = ({
   const handleCompleteJob = async () => {
     await patchJob(jobId, { comment, status: 2 });
     setStatus("complete");
+    toast.success("Job was approved successfully");
+    refresh();
   };
   const handleCommentChange = (event) => {
     setComment(event.target.value);
   };
   const handleDeleteJob = async () => {
     await deleteJob(jobId);
+    toast.success("Job was deleted successfully");
     refresh();
   };
   const handleUpdateJob = async () => {
@@ -46,6 +51,7 @@ const CompletedJob = ({
     // Reset comment input after submission
     await patchJob(jobId, { comment, status: 1 });
     setStatus("pending....");
+    toast.success(" Job submitted successfully");
   };
 
   return (
@@ -109,7 +115,7 @@ const CompletedJob = ({
               Delete job
             </button>
 
-            <button onClick={handleUpdateJob} className="btn btn-danger">
+            <button onClick={handleUpdateJob} className="btn btn-warning">
               Update job
             </button>
           </div>

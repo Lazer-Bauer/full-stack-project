@@ -1,7 +1,6 @@
 {
   "name": "task-front",
   "version": "0.1.0",
-  "homepage": "https://Lazer-Bauer.github.io/full-stack-project",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.4",

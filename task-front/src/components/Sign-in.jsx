@@ -70,16 +70,20 @@ const SignIn = () => {
   });
   return (
     <main
+      style={{
+        backgroundImage: `url('https://www.shutterstock.com/image-illustration/in…ss-technology-network-concept-600w-2113601942.jpg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "100vh",
+        zIndex: "-100",
+      }}
       className={`form-signin w-25 pt-5 flex-grow-1 mt-0 w-100 ${
         checked ? "" : `bg-dark`
       }`}
     >
       <form onSubmit={form.handleSubmit} className="pt-5">
-        <h1
-          className={`h3 mb-3 fw-normal text-center ${
-            checked ? "" : `text-light`
-          }`}
-        >
+        <i class="bi bi-person d-flex justify-content-center text-white align-items-center"></i>
+        <h1 className={"h3 mb-3 fw-normal text-center text-white "}>
           Please sign in
         </h1>
 
@@ -111,7 +115,7 @@ const SignIn = () => {
         </div>
         <div className="d-flex justify-content-center">
           <button
-            className="btn btn-primary py-2 my-5  w-25 "
+            className="btn btn-primary py-2 my-5  w-25 z-20 "
             disabled={!form.isValid}
             type="submit"
           >

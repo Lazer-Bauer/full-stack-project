@@ -3,12 +3,11 @@ import { createJob } from "../../services/JobServices";
 import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/auth.context";
 
 const JobCreationForm = ({ selectedDate, selectedUser, afterSubmit }) => {
   const [topic, setTopic] = useState("technology"); // default topic
   const [message, setMessage] = useState("");
-  // const [success, setSuccess] = useState(false);
-  // const [failed, setFailed] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,17 +36,7 @@ const JobCreationForm = ({ selectedDate, selectedUser, afterSubmit }) => {
   };
 
   return (
-    <div className="container mt-5">
-      {/* {success && (
-        <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-          Job was created successfully
-        </Alert>
-      )}
-      {failed && (
-        <Alert icon={<CheckIcon fontSize="inherit" />} severity="error">
-          failed to create job ! try again later
-        </Alert>
-      )} */}
+    <div className="container mt-5 mb-5" style={{ height: "200px" }}>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="topic" className="form-label">

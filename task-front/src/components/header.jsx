@@ -1,7 +1,7 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../context/auth.context";
 import { useState, useEffect } from "react";
-import Jobs from "./jobCreation/Jobs";
+
 const Header = () => {
   const {
     user,
@@ -15,7 +15,7 @@ const Header = () => {
   const location = useLocation();
   const [showSearch, setShowSearch] = useState(false);
   useEffect(() => {
-    if (location.pathname === "/" && jobs.length > 0) {
+    if (location.pathname === "/" && jobs.length > 0 && !admin) {
       setShowSearch(true);
     } else if (
       location.pathname === "/" ||
@@ -26,8 +26,8 @@ const Header = () => {
     } else {
       setShowSearch(jobs.length > 0);
     }
-    console.log(jobs);
-  }, [location, jobs]);
+    console.log("im use effect header", showSearch, jobs.length);
+  }, [location, jobs, showSearch]);
   const toggle = () => {
     setChecked(!checked);
     console.log(checked);

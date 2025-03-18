@@ -3,14 +3,15 @@ import { NavLink, useLocation } from "react-router-dom";
 const Footer = () => {
   const { user, admin } = useAuth();
   const { checked } = useAuth();
+
   const location = useLocation();
   return (
     <footer
-      className={`py-3 my-1 text-primary opacity-75  w-100 ${
+      className={` text-primary opacity-75  w-100 pt-5  p-0 ${
         checked ? "" : `bg-dark text-light opacity-100`
       } `}
     >
-      <ul className="nav justify-content-center border-bottom pb-3 mb-1">
+      <ul className="nav justify-content-center border-bottom pb-3 ">
         <li className="nav-item pe-5">
           <NavLink to="/" className="nav-link px-2 text-primary p-0">
             <i class="bi bi-house ps-3 fs-5 d-flex"></i>
