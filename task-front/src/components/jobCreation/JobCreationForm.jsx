@@ -36,7 +36,7 @@ const JobCreationForm = ({ selectedDate, selectedUser, afterSubmit }) => {
   };
 
   return (
-    <div className="container mt-5 mb-5" style={{ height: "200px" }}>
+    <div className="container mt-5 mb-5">
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="topic" className="form-label">

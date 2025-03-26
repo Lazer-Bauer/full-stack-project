@@ -41,9 +41,12 @@ const Header = () => {
   return (
     <>
       <header
-        className={`p-3 mb-3 border-bottom w-100 ${
-          !checked ? "bg-dark text-light" : "bg-info"
-        } navbar navbar-expand-sm position-fixed z-3`}
+        className={`p-3 mb-3 border-bottom w-100 navbar navbar-expand-sm position-fixed z-3 ${
+          !checked ? "text-light" : "text-dark"
+        }`}
+        style={{
+          backgroundColor: !checked ? "rgb(30, 50, 70)" : "rgb(0, 153, 204)", // Dark mode and light mode backgrounds
+        }}
       >
         <button
           className="navbar-toggler"
