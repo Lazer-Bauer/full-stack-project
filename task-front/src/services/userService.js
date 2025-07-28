@@ -7,7 +7,7 @@ export async function registerUser(details) {
 
 export async function login(values) {
   const response = await axios.post(
-    "http://172.31.46.75:5000/tasks/users/login",
+    "http://16.170.242.178:5000/tasks/users/login",
     values
   );
 
@@ -18,7 +18,7 @@ export async function login(values) {
   return response;
 }
 export async function getAllUsers() {
-  const response = await axios.get("http://localhost:5000/tasks/users");
+  const response = await axios.get("http://16.170.242.178:5000/tasks/users");
 
   console.log(mapUserResponse(response.data));
   return mapUserResponse(response.data);
